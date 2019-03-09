@@ -1,17 +1,17 @@
 package com.belana.production.utils;
 
+import com.belana.production.domain.entities.product.ProductParameters;
+import com.belana.production.domain.entities.product.ProductProperties;
+import com.belana.production.domain.models.binding.ProductRegisterBindingModel;
+import com.belana.production.domain.models.service.ProductParametersServiceModel;
 import com.belana.production.domain.models.service.ProductPropertiesServiceModel;
 import com.belana.production.domain.models.service.ProductServiceModel;
-import com.belana.production.domain.models.view.ProductListViewModel;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
+import org.modelmapper.TypeMap;
 
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-
-import static com.belana.production.utils.Constants.PRODUCT_PROPERTIES_NAME_PATTERN;
 
 
 public class MapperUtil {
@@ -20,7 +20,7 @@ public class MapperUtil {
 
     public MapperUtil() {
         mapper = new ModelMapper();
-//        mapProduct();
+        mapProduct();
     }
 
     public <S, D> D map(S source, Class<D> destinationClass) {
@@ -32,8 +32,8 @@ public class MapperUtil {
                 .map(s -> this.mapper.map(s, destinationClass)).collect(Collectors.toList());
     }
 
-//    private void mapProduct(){
-//
+    private void mapProduct(){
+
 //        Pattern pattern = Pattern.compile(PRODUCT_PROPERTIES_NAME_PATTERN);
 //        PropertyMap<ProductServiceModel, ProductListViewModel> mapProductToString = new PropertyMap<>() {
 //            @Override
@@ -60,9 +60,24 @@ public class MapperUtil {
 //        };
 //
 //        this.mapper.addMappings(mapStringToProduct);
-//
-//    }
-//
+
+        TypeMap<ProductRegisterBindingModel, ProductServiceModel>  productRegisterToServiceModel = mapper.createTypeMap(ProductRegisterBindingModel.class, ProductServiceModel.class)
+                .addMappings(new PropertyMap<ProductRegisterBindingModel, ProductServiceModel>() {
+                    @Override
+                    protected void configure() {
+                        map().getProductProperties().setType(this.source.getType());
+                        map().getProductProperties().setBaseWeight(this.source.getBaseWeight());
+                        map().getProductProperties().setElongation(this.source.getElongation());
+                        map().getProductParameters().setFormat(this.source.getFormat());
+                        map().getProductParameters().setPlays(this.source.getPlays());
+                        map().setDiameter(this.source.getDiameter());
+                        map().setCore(this.source.getCore());
+                        map().setPrice(this.source.getPrice());
+                    }
+                });
+
+    }
+
     public void addMappings(PropertyMap mappings) {
         this.mapper.addMappings(mappings);
     }

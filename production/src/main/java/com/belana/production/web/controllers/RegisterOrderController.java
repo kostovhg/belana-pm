@@ -3,8 +3,8 @@ package com.belana.production.web.controllers;
 import com.belana.production.domain.models.binding.OrderCreateBindingModel;
 import com.belana.production.domain.models.view.ClientListViewModel;
 import com.belana.production.domain.models.view.ProductListViewModel;
-import com.belana.production.services.ClientService;
-import com.belana.production.services.ProductService;
+import com.belana.production.services.ClientServiceImpl;
+import com.belana.production.services.ProductServiceImpl;
 import com.belana.production.utils.MapperUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,11 +19,11 @@ import java.util.List;
 public class RegisterOrderController {
 
     private MapperUtil mapper;
-    private ClientService clientService;
-    private ProductService productsService;
+    private ClientServiceImpl clientService;
+    private ProductServiceImpl productsService;
 
     @Autowired
-    public RegisterOrderController(MapperUtil mapper, ClientService clientService, ProductService productsService) {
+    public RegisterOrderController(MapperUtil mapper, ClientServiceImpl clientService, ProductServiceImpl productsService) {
         this.mapper = mapper;
         this.clientService = clientService;
         this.productsService = productsService;

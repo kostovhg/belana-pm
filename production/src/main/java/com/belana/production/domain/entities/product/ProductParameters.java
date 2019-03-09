@@ -6,10 +6,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
+
+import static com.belana.production.utils.Constants.*;
 
 /**
  * Standardized parameters of products or goal parameters for production
@@ -19,23 +20,19 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Entity
 @Table(name = "product_parameters")
-public class ProductParameters extends UUIDStringEntity {
+@IdClass(ProductParameters.class)
+public class ProductParameters implements Serializable {
 
-    @Column(name = "format", nullable = false, columnDefinition = "smallint default '270'")
-    private int format;
-
-    @Column(name = "diameter", nullable = false, columnDefinition = "smallint default '270'")
-    private int diameter;
-
-    @Column(name = "core", nullable = false, columnDefinition = "smallint default '270'")
-    private int core;
-
-    @Column(name = "plays", nullable = false, columnDefinition = "smallint default '270'")
+    /*
+    ToConsider: this is also finite entity
+     */
+    @Id
+    @Column(name = "plays", columnDefinition = "smallint default '2'")
     private int plays;
 
-    @Column(name = "weight", nullable = false, columnDefinition = "smallint default '270'")
-    private double weight;
+    @Id
+    @Column(name = "format", columnDefinition = "DECIMAL(3,2) DEFAULT '2.74'")
+    private Double format;
 
-    @Column(name = "price", columnDefinition = "DECIMAL(10,2) default '0.0'")
-    private BigDecimal price;
+
 }

@@ -10,16 +10,20 @@
     <main>
         <div class="container w-50">
             <form>
+                <!--<div class="form-group">-->
+                    <!--<label for="client" class="bmd-label-floating">Select client</label>-->
+                    <!--<select class="form-control" id="client" name="client">-->
+                        <!--<option th:each="client : ${clients}" th:value="${client.id}" th:text="${client.name}"></option>-->
+                    <!--</select>-->
+                <!--</div>-->
                 <div class="form-group">
                     <label for="client" class="bmd-label-floating">Select client</label>
-                    <select class="form-control" id="client" name="client">
-                        <option th:each="client : ${clients}" th:value="${client.id}" th:text="${client.name}"></option>
-                    </select>
+                    <input type="text" id="client" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="product" class="bmd-label-floating">Select product</label>
                     <select class="form-control" id="product" name="product">
-                        <option th:each="product : ${products}" th:value="${product.id}" th:text="${product.name}"></option>
+                        <option th:each="product : ${products}" th:value="${product.getId()}" th:text="${product.getName()}"></option>
                     </select>
                 </div>
                 <!--<div class="form-group">-->
@@ -85,5 +89,12 @@
     <footer th:replace="/layout/partials/footer :: footer"></footer>
 </div>
 <div th:replace="/layout/partials/scripts :: bottom-scripts"></div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#client').autocomplete({
+            source: '/client/search'
+        })
+    })
+</script>
 </body>
 </html>

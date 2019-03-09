@@ -1,5 +1,6 @@
 package com.belana.production.domain.models.service;
 
+import com.belana.production.domain.entities.product.ProductParameters;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,11 +12,8 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class ProductParametersServiceModel {
 
-    private int format;
-    private int diameter;
-    private int core;
+    private ProductParameters id;
     private int plays;
-    private double weight;
-    private BigDecimal price;
+    private Double format;
 
 }

@@ -16,7 +16,7 @@ import java.util.Objects;
 class TemporalKey implements Serializable {
 
     @MapKeyTemporal(TemporalType.DATE)
-    @Column(name = "date", nullable = false, updatable = false)
+    @Column(name = "date", nullable = false)
     private Date date;
 
     @MapKeyTemporal(TemporalType.TIME)

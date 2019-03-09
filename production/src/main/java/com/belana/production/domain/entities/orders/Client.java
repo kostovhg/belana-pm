@@ -16,7 +16,7 @@ import javax.persistence.Table;
 @Table(name = "clients", schema = "belana_clients_db")
 public class Client extends UUIDStringEntity {
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, unique = true)
     private String name;
 
     @Column(name = "address")

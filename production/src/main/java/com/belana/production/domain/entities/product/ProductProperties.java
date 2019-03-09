@@ -1,5 +1,6 @@
 package com.belana.production.domain.entities.product;
 
+import com.belana.production.domain.entities.base.PropertiesKey;
 import com.belana.production.domain.entities.base.UUIDStringEntity;
 import com.belana.production.domain.entities.enums.ProductType;
 import lombok.Getter;
@@ -16,17 +17,10 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "product_properties")
-public class ProductProperties extends UUIDStringEntity {
+public class ProductProperties {
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false, name = "type")
-    private ProductType type;
-
-    @Column(name = "base_weight", nullable = false, columnDefinition = "TINYINT default '15'")
-    private int baseWeight;
-
-    @Column(name = "elongation", nullable = false, columnDefinition = "TINYINT default '10'")
-    private int elongation;
+    @EmbeddedId
+    private PropertiesKey id;
 
 //    @Column(name = "moisture", columnDefinition = "TINYINT default '4'")
 //    private int moisture;
