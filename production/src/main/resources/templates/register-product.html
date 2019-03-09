@@ -1,0 +1,73 @@
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout/partials/head :: head"></head>
+<body>
+<div class="container-fluid">
+    <header>
+        <nav th:replace="/layout/partials/nav :: nav"></nav>
+    </header>
+    <main>
+        <div class="container w-50">
+            <form th:action="@{/register-product}" method="post">
+                <!-- Type selection radio button -->
+                <div class="row">
+                    <div class="radio col-md"
+                         th:each="source : ${T(com.belana.production.domain.entities.enums.ProductType).values()}">
+                        <label>
+                            <input name="type" type="radio" th:value="${{source}}"/>
+                            <p th:text="| &nbsp; ${source} |">Something is wrong !</p></label>
+                    </div>
+                </div>
+                <!-- Base weight selector -->
+                <div class="form-group">
+                    <label for="baseWeight" class="bmd-label-floating">Enter base weight</label>
+                    <input type="number" class="form-control" id="baseWeight" name="baseWeight">
+                </div>
+                <!-- Elongation selector -->
+                <div class="form-group">
+                    <label for="elongation" class="bmd-label-floating">Enter elongation</label>
+                    <input type="number" class="form-control" id="elongation" name="elongation">
+                </div>
+                <!-- Format selector -->
+                <div class="form-group">
+                    <label for="format" class="bmd-label-floating">Enter format</label>
+                    <input type="number" class="form-control" id="format" name="format">
+                </div>
+                <!-- Diameter selector -->
+                <div class="form-group">
+                    <label for="diameter" class="bmd-label-floating">Enter diameter</label>
+                    <input type="number" class="form-control" id="diameter" name="diameter">
+                </div>
+                <!-- Core selector //TODO this should be separate entity -->
+                <div class="form-group">
+                    <label for="core" class="bmd-label-floating">Enter core</label>
+                    <input type="number" class="form-control" id="core" name="core">
+                </div>
+                <!-- Number of sheet plays selector -->
+                <label for="plays" class="bmd-label-floating">Select type</label>
+                <select class="form-control" id="plays" name="plays">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+                <!-- Total weight ordered selector -->
+                <div class="form-group">
+                    <label for="weight" class="bmd-label-floating">Enter total order weight</label>
+                    <input type="number" class="form-control" id="weight" name="weight">
+                </div>
+                <!-- Price selector - can be null -->
+                <div class="form-group">
+                    <label for="price" class="bmd-label-floating">Enter price</label>
+                    <input type="number" class="form-control" id="price" name="price">
+                </div>
+                <button class="btn btn-default">Cancel</button>
+                <button type="submit" class="btn btn-primary btn-raised">Submit</button>
+            </form>
+        </div>
+    </main>
+    <footer th:replace="/layout/partials/footer :: footer"></footer>
+</div>
+<div th:replace="/layout/partials/scripts :: bottom-scripts"></div>
+</body>
+</html>
